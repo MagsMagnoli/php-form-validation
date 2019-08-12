@@ -11,21 +11,44 @@ if (isset($_POST['Submit'])) {
     // name
     if (empty($_POST["Name"])) {
         $NameError = "Name is Required";
+    } else {
+        $Name = Test_User_Input($_POST['Name']);
+
+        // validate name
+        if (!preg_match("/^[A-Za-z\. ]*$/", $Name)) {
+            $NameError = "Invalid name";
+        }
     }
 
     // email
     if (empty($_POST["Email"])) {
         $EmailError = "Email is Required";
+    } else {
+        $Email = Test_User_Input($_POST['Email']);
+
+        // validate email
+        if (!preg_match("/[a-zA-Z0-9._-]{3,}@[a-zA-Z0-9._-]{3,}[.]{1}[a-zA-Z0-9._-]{2,}/", $Email)) {
+            $EmailError = "Invalid email";
+        }
     }
 
     // gender
     if (empty($_POST["Gender"])) {
         $GenderError = "Gender is Required";
+    } else {
+        $Gender = Test_User_Input($_POST['Gender']);
     }
 
     // website
     if (empty($_POST["Website"])) {
         $WebsiteError = "Website is Required";
+    } else {
+        $Website = Test_User_Input($_POST['Website']);
+
+        // validate website
+        if (!preg_match("/(https:|ftp:)\/\/+[a-zA-Z0-9.\-_\/?\$=&\#\~`!]+\.[a-zA-Z0-9.\-_\/?\$=&\#\~`!]*/", $Website)) {
+            $WebsiteError = "Invalid website";
+        }
     }
 }
 
