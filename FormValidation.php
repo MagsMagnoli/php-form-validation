@@ -1,4 +1,7 @@
 <?php
+// enter email to receive form data
+$ReceivingEmail = "";
+
 // init variables
 $Name = "";
 $Email = "";
@@ -65,6 +68,21 @@ if (isset($_POST['Submit'])) {
             echo "Gender: $Gender<br>";
             echo "Website: $Website<br>";
             echo "Comment: {$_POST['Comment']}<br>";
+
+            // if receiving email provided
+            if (!empty($ReceivingEmail)) {
+                $subject = "Contact Form";
+                $body = "A person named $Name filled out the form!\n" .
+                    "Their gender is: $Gender\n" .
+                    "Their website is: $Website\n" .
+                    "Comment: " . $_POST['Comment'];
+                $sender = "From:$Email";
+                if (mail($ReceivingEmail, $subject, $body, $sender)) {
+                    echo "Information sent successfully!";
+                } else {
+                    echo "Error sending information";
+                }
+            }
         } else {
             echo "<span class=\"error\">* Please update your information and try again</span>";
         }
