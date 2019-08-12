@@ -1,5 +1,9 @@
 <?php
 // init variables
+$Name = "";
+$Email = "";
+$Gender = "";
+$Website = "";
 $NameError = "";
 $EmailError = "";
 $GenderError = "";
@@ -50,6 +54,21 @@ if (isset($_POST['Submit'])) {
             $WebsiteError = "Invalid website";
         }
     }
+
+    // if form filled below executes
+    if (!empty($Name) && !empty($Email) && !empty($Gender) && !empty($Website)) {
+        // if no errors
+        if (empty($NameError) && empty($EmailError) && empty($GenderError) && empty($WebsiteError)) {
+            echo "<h2>Your Information</h2>";
+            echo "Name: " . ucwords($Name) . "<br>";
+            echo "Email: $Email<br>";
+            echo "Gender: $Gender<br>";
+            echo "Website: $Website<br>";
+            echo "Comment: {$_POST['Comment']}<br>";
+        } else {
+            echo "<span class=\"error\">* Please update your information and try again</span>";
+        }
+    }
 }
 
 function Test_User_Input($Data)
@@ -64,22 +83,22 @@ function Test_User_Input($Data)
 
 <head>
     <title>Form Validation</title>
-</head>
-<style type="text/css">
-    input[type="text"],
-    input[type="email"],
-    textarea {
-        border: 1px solid dashed;
-        background-color: rgb(221, 216, 212);
-        width: 600px;
-        padding: .5em;
-        font-size: 1.0em;
-    }
+    <style type="text/css">
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            border: 1px solid dashed;
+            background-color: rgb(221, 216, 212);
+            width: 600px;
+            padding: .5em;
+            font-size: 1.0em;
+        }
 
-    .error {
-        color: red;
-    }
-</style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
 
 <body>
 
